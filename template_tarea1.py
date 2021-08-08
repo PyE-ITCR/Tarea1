@@ -11,7 +11,7 @@ Template con lectura de datos en archivo csv
 import numpy as np
 
 
-input_dir='C:/Users/PATH/' #PATH al archivo de datos, cambiar según cada computadora. Sirve para evitar 'File not found'
+input_dir='Utilidades/' #PATH al archivo de datos, cambiar según cada computadora. Sirve para evitar 'File not found'
 filename=input_dir+'energydata_complete.csv'
 
 # Esta línea lee la matriz de datos (sin titulos) que van desde T1 hasta RH_9 y funciona para números solamente.
