@@ -9,7 +9,8 @@ Template con lectura de datos en archivo csv
 """
 
 import numpy as np
-from statistics import mode, mean, median
+import matplotlib.pyplot as plt
+import statistics as st 
 
 input_dir='Utilidades/' #PATH al archivo de datos, cambiar según cada computadora. Sirve para evitar 'File not found'
 filename=input_dir+'energydata_complete.csv'
@@ -35,13 +36,47 @@ def extraerDatos():
         
     T4.sort() #Se hizo uso de la funcion de python para listas "sort", con el fin de poder realizar el calculo de la mediana de forma eficiente
 
-    promedio = mean(T4)
-    mediana = median(T4)
-    moda = mode(T4)
-    print(promedio)
-    print(mediana)
-    print(moda)
+    promedio = st.mean(T4) #Se utiliza la librería "Statistics" para calcular el promedio
+    mediana = st.median(T4) #Se utiliza la librería "Statistics" para calcular la mediana
+    moda = st.mode(T4) #Se utiliza la librería "Statistics" para calcular la moda
 
+    #MEDIDAS DE TENDENCIA
+    print("El promedio de las temperaturas T4 es: " + str(promedio))
+    print("La mediana de las temperaturas T4 es: " + str(mediana))
+    print("La moda de las temperaturas T4 es: " + str(moda))
+
+    dict = {} 
+    for T in T4:
+        if T in dict:
+            dict[T]+=1
+        else:
+            dict[T]=1
+
+
+    #PRESENTACIÓN DE GRÁFICO
+            
+    #Se asigna estructura del gráfico mediante la librería matplot
+    plt.bar(np.array(getKeys(dict)), np.array(getValues(dict)), width = 0.06, align="center")
+    #plt.barh(np.array(getKeys(dict)), np.array(getValues(dict)), height = 0.06, align="center")
+    plt.xlabel('Temperatura')
+    plt.ylabel('Frecuencia Absoluta')
+    plt.title("Gráfico Temperatura Oficina")
+    plt.legend(["Temperatura","Ámbito"])
+    plt.show()   
+
+
+def getKeys(dict): 
+    list = [] 
+    for key in dict.keys(): 
+        list.append(key) 
+    return list
+
+def getValues(dict):  
+    list = [] 
+    for value in dict.values(): 
+        list.append(value) 
+    return list
+    
 extraerDatos()
     
 
