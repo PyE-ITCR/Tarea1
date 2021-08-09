@@ -10,7 +10,8 @@ Template con lectura de datos en archivo csv
 
 import numpy as np
 import matplotlib.pyplot as plt
-import statistics as st 
+import statistics as st
+import math
 
 input_dir='Utilidades/' #PATH al archivo de datos, cambiar según cada computadora. Sirve para evitar 'File not found'
 filename=input_dir+'energydata_complete.csv'
@@ -46,19 +47,28 @@ def extraerDatos():
     Q2 = cuartiles[1]
     Q3 = cuartiles[2]
 
-    
+    print("MEDIDAS DE TENDENCIA")
     print("El promedio de las temperaturas T4 es: " + str(promedio))
     print("La mediana de las temperaturas T4 es: " + str(mediana))
     print("La moda de las temperaturas T4 es: " + str(moda))
-    print("Los cuartiles son: " + "Q1 = " + str(Q1) + " Q2 = " + str(Q2) + " Q3 = " + str(Q3))
+    print("Los cuartiles son: " + " Q1 = " + str(Q1) + " Q2 = " + str(Q2) + " Q3 = " + str(Q3))
 
 
 
     #MEDIDAS DE DISPERCIÓN
     varianza = st.variance(T4)
-
+    desvEst = math.sqrt(varianza)
+    coefVar = (desvEst/promedio)*100
+    rangoMuestral = T4[-1] - T4[0]
+    rangoInter = Q3 - Q1
     
-    print(varianza)
+
+    print("\n\nMEDIDAS DE TENDENCIA")
+    print("La varianza de las temperaturas T4 es: " + " s^2 = " + str(varianza))
+    print("La desviación estándar de las temperaturas T4 es: " + " s = " + str(desvEst))
+    print("El coeficiente de variación de las temperaturas T4 es: " + " c.v = " + str(coefVar))
+    print("El rango muestral de las temperaturas T4 es: " + " r = " + str(rangoMuestral))
+    print("El rango intercuartílico de las temperaturas T4 es: " + " RIC = " + str(rangoInter))
 
 
 
