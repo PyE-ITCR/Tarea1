@@ -36,14 +36,31 @@ def extraerDatos():
         
     T4.sort() #Se hizo uso de la funcion de python para listas "sort", con el fin de poder realizar el calculo de la mediana de forma eficiente
 
+
+    #MEDIDAS DE TENDENCIA
     promedio = st.mean(T4) #Se utiliza la librería "Statistics" para calcular el promedio
     mediana = st.median(T4) #Se utiliza la librería "Statistics" para calcular la mediana
     moda = st.mode(T4) #Se utiliza la librería "Statistics" para calcular la moda
+    cuartiles = st.quantiles(T4)
+    Q1 = cuartiles[0]
+    Q2 = cuartiles[1]
+    Q3 = cuartiles[2]
 
-    #MEDIDAS DE TENDENCIA
+    
     print("El promedio de las temperaturas T4 es: " + str(promedio))
     print("La mediana de las temperaturas T4 es: " + str(mediana))
     print("La moda de las temperaturas T4 es: " + str(moda))
+    print("Los cuartiles son: " + "Q1 = " + str(Q1) + " Q2 = " + str(Q2) + " Q3 = " + str(Q3))
+
+
+
+    #MEDIDAS DE DISPERCIÓN
+    varianza = st.variance(T4)
+
+    
+    print(varianza)
+
+
 
     dict = {} 
     for T in T4:
