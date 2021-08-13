@@ -20,8 +20,6 @@ filename=input_dir+'energydata_complete.csv'
 # En su forma actual, esta línea NO LEE datos de tiempo. Para cambios en el mismo, usar la referencia de la funcion genfromtxt como guia
 datos=np.genfromtxt(filename,delimiter=';',skip_header=1, usecols = range(3,21))
 
-# Su código va aquí...
-
 def extraerDatos():
 
     T4 = [] #Lista en la que se almacenaran los valores de la temperatura en la oficina
@@ -42,12 +40,14 @@ def extraerDatos():
     promedio = st.mean(T4) #Se utiliza la librería "Statistics" para calcular el promedio
     mediana = st.median(T4) #Se utiliza la librería "Statistics" para calcular la mediana
     moda = st.mode(T4) #Se utiliza la librería "Statistics" para calcular la moda
-    cuartiles = st.quantiles(T4)
-    Q1 = cuartiles[0]
-    Q2 = cuartiles[1]
-    Q3 = cuartiles[2]
+    cuartiles = st.quantiles(T4) #Se utiliza la librería "Statistics" para calcular los cuartiles de T4
+    
+    Q1 = cuartiles[0] #De la lista de cuartiles se extrae el cuartil 1
+    Q2 = cuartiles[1] #De la lista de cuartiles se extrae el cuartil 2
+    Q3 = cuartiles[2] #De la lista de cuartiles se extrae el cuartil 3
 
-    print("MEDIDAS DE TENDENCIA")
+    #Imprime medidas de tendencia
+    print("\n\nMEDIDAS DE TENDENCIA")
     print("El promedio de las temperaturas T4 es: " + str(promedio))
     print("La mediana de las temperaturas T4 es: " + str(mediana))
     print("La moda de las temperaturas T4 es: " + str(moda))
@@ -56,14 +56,15 @@ def extraerDatos():
 
 
     #MEDIDAS DE DISPERCIÓN
-    varianza = st.variance(T4)
-    desvEst = math.sqrt(varianza)
-    coefVar = (desvEst/promedio)*100
-    rangoMuestral = T4[-1] - T4[0]
-    rangoInter = Q3 - Q1
+    varianza = st.variance(T4) #Se utiliza la librería "Statistics" para calcular la varianza de T4
+    desvEst = math.sqrt(varianza) #Se utiliza la librería "Math" para calcular la raiz cuadrada de la varianza (Desviacion Estandar)
+    coefVar = (desvEst/promedio)*100 #Se realiza la formula de calculo del coeficiente de variacion
+    rangoMuestral = T4[-1] - T4[0] #Se realiza la formula de calculo del rango muestral
+    rangoInter = Q3 - Q1 #Se realiza la formula de calculo del rango intercuartilico
     
 
-    print("\n\nMEDIDAS DE TENDENCIA")
+    #Imprime medidas de dispersión
+    print("\n\nMEDIDAS DE DISPERSIÓN")
     print("La varianza de las temperaturas T4 es: " + " s^2 = " + str(varianza))
     print("La desviación estándar de las temperaturas T4 es: " + " s = " + str(desvEst))
     print("El coeficiente de variación de las temperaturas T4 es: " + " c.v = " + str(coefVar))
@@ -71,7 +72,7 @@ def extraerDatos():
     print("El rango intercuartílico de las temperaturas T4 es: " + " RIC = " + str(rangoInter))
 
 
-
+    #Se itera sobre T4 para sacar la cantidad de repeticiones de cada medida
     dict = {} 
     for T in T4:
         if T in dict:
@@ -88,7 +89,7 @@ def extraerDatos():
     plt.xlabel('Temperatura')
     plt.ylabel('Frecuencia Absoluta')
     plt.title("Gráfico Temperatura Oficina")
-    plt.legend(["Temperatura","Ámbito"])
+    plt.legend(["Temperatura"])
     plt.show()   
 
 
